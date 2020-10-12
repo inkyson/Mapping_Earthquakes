@@ -20,7 +20,7 @@ let map = L.map('mapid').setView([40.7, -94.5], 4);
 // OpenStreetMap URL inside the curly braces of our tileLayer()
 // add the id attribute and assign it which will show the streets on the map.
 // To change the map's style, change the map id using the list of Mapbox ids: mapbox/streets-v11, mapbox/outdoors-v11, mapbox/light-v10
-//mapbox/dark-v10, mapbox/satellite-v9, mapbox/satellite-streets-v11
+//mapbox/dark-v10, mapbox/satellite-v9, mapbox/satellite-streets-v11, mapbox/navigation-guidance-night-v3
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
