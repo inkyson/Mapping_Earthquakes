@@ -1,8 +1,8 @@
 // Add console.log to check to see if our code is working
 console.log("working");
 
-// Create the map object with center at SFO
-let map = L.map('mapid').setView([37.5, -122.5], 10);
+// Create the map object with center and zoom level
+let map = L.map('mapid').setView([30, 30], 2);
 
 // Add GeoJSON data:
 let sanFranAirport =
@@ -59,3 +59,6 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/
 });
 // Then we add our 'graymap' tile layer to the map
 streets.addTo(map);
+
+// Accessing the airport GeoJSON URL
+let airportData = "https://raw.githubusercontent.com/inkyson/Mapping_Earthquakes/Mapping_GeoJSON_Points/majorAirports.json"
