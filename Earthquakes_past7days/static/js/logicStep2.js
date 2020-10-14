@@ -31,23 +31,35 @@ let map = L.map('mapid', {
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
-// // Accessing the Toronto neighborhoods GeoJSON URL.
-// let torontoHoods = "https://raw.githubusercontent.com/inkyson/Mapping_Earthquakes/main/torontoNeighborhoods.json"
-
-// // Create a style for the lines
-// let myStyle = {
-//     color: "#0000ff",
-//     weight: 1,
-//     fillColor: "#ffff00"
-// };
-
 // Retrieve the earthquake GeoJSON data.
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data) {
+    // This function returns the style data for each of the earthquakes we plot on the map.
+    // We pass the magnitude of the earthquake into a function to calculate the radius.
+    function styleInfo(feature) {
+        return {
+            opacity: 1,
+            fillOpacity: 1,
+            fillColor: "#ffae42",
+            color: "#000000",
+            radius: getRadius(),
+            stroke: true,
+            weight: 0.5
+        };
+    function getRadius(magnitude) {
+        if (magnitude === 0) {
+            return 1;
+        };
+        return magnitude * 4;
+    }
+    };
     // Creating a GeoJSON layer with the retrieved data.
-    L.geoJSON(data).addTo(map);
+    L.geoJSON(data, {
+        // We turn each feature into a circleMarker on the map
+        pointToLayer: function(feature, latlng) {
+            console.log(data);
+            return L.circleMarker(latlng);
+        },
+        // We set the style for each circleMarker using our styleInfo function.
+        style: styleInfo
+    }).addTo(map);
 });
-
-// style: myStyle,
-// onEachFeature: function(feature, layer) {
-//     layer.bindPopup("<h2>Neighborhood: " + feature.properties.AREA_NAME + "</h2>")
-// }
